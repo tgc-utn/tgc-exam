@@ -7,8 +7,8 @@ using Microsoft.Xna.Framework.Input;
 namespace TGC.Exam
 {
     /// <summary>
-    ///     Esta es la clase principal  del juego.
-    ///     Inicialmente puede ser renombrado o copiado para hacer más ejemplos chicos, en el caso de copiar para que se
+    ///     Esta es la clase principal del juego.
+    ///     Inicialmente puede ser renombrado o copiado para hacer mas ejemplos chicos, en el caso de copiar para que se
     ///     ejecute el nuevo ejemplo deben cambiar la clase que ejecuta Program <see cref="Program.Main()" /> linea 10.
     /// </summary>
     public class TGCGame : Game
@@ -16,46 +16,28 @@ namespace TGC.Exam
         public const string ContentFolder3D = "Models/";
         public const string ContentFolderEffect = "Effects/";
         public const string ContentFolderTextures = "Textures/";
-
         private const bool LightingEnabled = true;
 
         private GraphicsDeviceManager Graphics { get; set; }
-
         private FreeCamera Camera { get; set; }
-
         private SpherePrimitive SphereModel { get; set; }
-
         private Quad FloorQuad { get; set; }
-
         private Model RobotModel { get; set; }
-
         private FullScreenQuad FullScreenQuad { get; set; }
-
         private Cube LightCube { get; set; }
-
         private Matrix LavaSphereWorld { get; set; }
         private Matrix WaterSphereWorld { get; set; }
         private Matrix RockSphereWorld { get; set; }
         private Matrix RobotWorld { get; set; }
         private Matrix FloorWorld { get; set; }
-
-
         private Texture2D LavaTexture { get; set; }
-
         private Texture2D WaterTexture { get; set; }
-
         private Texture2D RockTexture { get; set; }
-
         private Texture2D FloorTexture { get; set; }
-
         private Texture2D RobotTexture { get; set; }
-
         private Vector3 LightOnePosition { get; set; }
         private Vector3 LightTwoPosition { get; set; }
-
-
         private Effect Effect { get; set; }
-
         private RenderTarget2D RenderTarget { get; set; }
 
         /// <summary>
@@ -75,7 +57,7 @@ namespace TGC.Exam
 
         /// <summary>
         ///     Se llama una sola vez, al principio cuando se ejecuta el ejemplo.
-        ///     Escribir aquí todo el código de inicialización: todo procesamiento que podemos pre calcular para nuestro juego.
+        ///     Escribir aqui el codigo de inicializacion: procesamiento que podemos pre calcular para nuestro juego.
         /// </summary>
         protected override void Initialize()
         {
@@ -123,8 +105,12 @@ namespace TGC.Exam
             // Se carga el efecto principal
             Effect = Content.Load<Effect>(ContentFolderEffect + "TgcExamShader");
             foreach (var mesh in RobotModel.Meshes)
+            {
                 foreach (var part in mesh.MeshParts)
+                {
                     part.Effect = Effect;
+                }
+            }
 
             RenderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
@@ -141,7 +127,7 @@ namespace TGC.Exam
 
         /// <summary>
         ///     Se llama en cada frame.
-        ///     Se debe escribir toda la lógica de computo del modelo, así como también verificar entradas del usuario y reacciones
+        ///     Se debe escribir toda la logica de computo del modelo, asi como tambien verificar entradas del usuario y reacciones
         ///     ante ellas.
         /// </summary>
         protected override void Update(GameTime gameTime)
@@ -161,8 +147,10 @@ namespace TGC.Exam
             
             // Capturar Input teclado
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 //Salgo del juego.
                 Exit();
+            }
 
 
             base.Update(gameTime);
@@ -170,12 +158,10 @@ namespace TGC.Exam
 
         /// <summary>
         ///     Se llama cada vez que hay que refrescar la pantalla.
-        ///     Escribir aquí todo el código referido al renderizado.
+        ///     Escribir aqui el código referido al renderizado.
         /// </summary>
         protected override void Draw(GameTime gameTime)
         {
-
-
             GraphicsDevice.SetRenderTarget(RenderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -198,8 +184,6 @@ namespace TGC.Exam
             Effect.CurrentTechnique = Effect.Techniques["PostProcessing"];
             Effect.Parameters["ModelTexture"].SetValue(RenderTarget);
             FullScreenQuad.Draw(Effect);
-
-            
 
             base.Draw(gameTime);
         }
@@ -234,7 +218,10 @@ namespace TGC.Exam
             FullScreenQuad.Dispose();
 
             if (LightingEnabled)
+            {
                 LightCube.Dispose();
+            }
+
             base.UnloadContent();
         }
     }
